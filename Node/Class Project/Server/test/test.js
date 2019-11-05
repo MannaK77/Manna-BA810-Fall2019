@@ -223,7 +223,7 @@ describe('ToDos', () => {
         Todo.remove({}, (err) => {
             User.remove({}, (err) => {
                 done();
-            });    
+            });
         });
     });
 
@@ -272,27 +272,27 @@ describe('ToDos', () => {
         });
     });
 
-    // it('it should GET a todo', (done) => {
-    //     var todo = new Todo({
-    //         "userid": USER_ID,
-    //         "todo": "This is my ToDo"
-    //     })
-        
-    //     todo.save((err, todo) => {
-    //         chai.request(server)
-    //             .get('/api/todos/' + todo._id)
-    //             .end((err, res) => {
-    //                 res.should.have.status(200);
-    //                 res.body.should.be.a('object');
-    //                 res.body.should.have.property('userid');
-    //                 res.body.should.have.property('todo');
-    //                 res.body.should.have.property('completed');
-    //                 res.body.should.have.property('dateCreated');
-    //                 res.body.should.have.property('_id').eql(todo._id.toString());
-    //                 done();
-    //             });
-    //     });
-    // });
+    it('it should GET a todo', (done) => {
+        var todo = new Todo({
+            "userid": USER_ID,
+            "todo": "This is my ToDo"
+        })
+
+        todo.save((err, todo) => {
+            chai.request(server)
+                .get('/api/todos/' + todo._id)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('userid');
+                    res.body.should.have.property('todo');
+                    res.body.should.have.property('completed');
+                    res.body.should.have.property('dateCreated');
+                    res.body.should.have.property('_id').eql(todo._id.toString());
+                    done();
+                });
+        });
+    });
 
     // it('it should UPDATE a todo', (done) => {
 
