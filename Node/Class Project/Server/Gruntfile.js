@@ -7,6 +7,10 @@ module.exports = function (grunt) {
             dev: {
                 NODE_ENV: 'development'
             },
+            production: {
+                NODE_ENV: 'production'
+            }
+        },
 
             jshint: {
                 options: {
@@ -21,17 +25,11 @@ module.exports = function (grunt) {
                     script: 'index.js'
                 }
             },
-
-            production: {
-                NODE_ENV: 'production'
-            }
-        }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-nodemon');
     grunt.loadNpmTasks('grunt-env');
-
 
 
     grunt.registerTask('default', [
@@ -42,9 +40,9 @@ module.exports = function (grunt) {
 
 
 
-
     grunt.registerTask('production', [
         'env:production',
         'nodemon'
     ]);
 };
+
