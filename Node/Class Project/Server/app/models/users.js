@@ -13,7 +13,7 @@ var userSchema = new Schema({
 
 });
 
-UserSchema.pre('save', function (next) {
+/*UserSchema.pre('save', function (next) {
     var person = this;
     if (this.isModified('password') || this.isNew) {
         Bcrypt.genSalt(10, function (err, salt) {
@@ -41,6 +41,6 @@ UserSchema.methods.comparePassword = function (passw, cb) {
         }
         cb(null, isMatch);
     });
-};
+};*/
 
 module.exports = Mongoose.model('User', userSchema);

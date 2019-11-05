@@ -30,7 +30,7 @@ it('it should return 404', (done) => {
         });
 });
 
-/*describe('User', () => {
+describe('User', () => {
     beforeEach((done) => {
         User.remove({}, (err) => {
             done();
@@ -214,18 +214,18 @@ it('it should return 404', (done) => {
         });
     });
 
-});*/
+});
 
 var USER_ID;
 
 describe('ToDos', () => {
     beforeEach((done) => {
         Todo.remove({}, (err) => {
-            User.remove({}, (err) => {
+            //User.remove({}, (err) => {
                 done();
             });
         });
-    });
+   
 
     var user = new User({
         "firstName": "Jane",
@@ -286,7 +286,7 @@ describe('ToDos', () => {
                     res.body.should.be.a('object');
                     res.body.should.have.property('userid');
                     res.body.should.have.property('todo');
-                    res.body.should.have.property('completed');
+                    res.body.should.have.property('status');
                     res.body.should.have.property('dateCreated');
                     res.body.should.have.property('_id').eql(todo._id.toString());
                     done();
@@ -294,47 +294,50 @@ describe('ToDos', () => {
         });
     });
 
-    // it('it should UPDATE a todo', (done) => {
+    it('it should UPDATE a todo', (done) => {
 
-    //     var todo = new Todo({
-    //         "userid": USER_ID,
-    //         "todo": "This is my ToDo",
-    //         "description": "This is a description"
-    //     })
-    //     todo.save((err, todo) => {
-    //         chai.request(server)
-    //             .put('/api/todos/' + todo._id)
-    //             .send({
-    //                 "_id": todo._id,
-    //                 "userid": USER_ID,
-    //                 "todo": "Get it done!",
-    //                 "description": "I don't need a description",
-    //             })
-    //             .end((err, res) => {
-    //                 res.should.have.status(200);
-    //                 res.body.should.be.a('object');
-    //                 res.body.should.have.property('todo').eql('Get it done!');
-    //                 res.body.should.have.property('description').eql("I don't need a description");
-    //                 done();
-    //             });
-    //     });
-    // });
+        var todo = new Todo({
+            "userid": USER_ID,
+            "todo": "This is my ToDo",
+            "detail": "This is a description"
+        })
+        todo.save((err, todo) => {
+            chai.request(server)
+                .put('/api/todos/' + todo._id)
+                .send({
+                    "_id": todo._id,
+                    "userid": USER_ID,
+                    "todo": "Get it done!",
+                    "detail": "I don't need a description",
+                })
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('todo').eql('Get it done!');
+                    res.body.should.have.property('detail').eql("I don't need a description");
+                    done();
+                });
+        });
+    });
 
-    // it('it should DELETE a todo given the id', (done) => {
-    //     var todo = new Todo({
-    //         "userid": USER_ID,
-    //         "todo": "This is my ToDo",
-    //         "description": "This is a description"
-    //     })
-    //     todo.save((err, todo) => {
-    //         chai.request(server)
-    //             .delete('/api/todos/' + todo.id)
-    //             .end((err, res) => {
-    //                 res.should.have.status(200);
-    //                 done();
-    //             });
-    //     });
-    // });
-
+    it('it should DELETE a todo given the id', (done) => {
+        var todo = new Todo({
+            "userid": USER_ID,
+            "todo": "This is my ToDo",
+            "description": "This is a description"
+        })
+        todo.save((err, todo) => {
+            chai.request(server)
+                .delete('/api/todos/' + todo.id)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    done();
+                });
+        });
+    });
 
 });
+
+
+
+

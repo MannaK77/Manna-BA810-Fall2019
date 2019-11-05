@@ -1,11 +1,11 @@
 'use strict'
 var express = require('express'),
-    router = express.Router(),
-    logger = require('../../config/logger');
+router = express.Router(),
+logger = require('../../config/logger');
 var mongoose = require('mongoose'),
-    User = mongoose.model('User');
-passportService = require('../../config/passport'),
-    passport = require('passport');
+User = mongoose.model('User');
+const passportService = require('../../config/passport'),
+passport = require('passport');
 
 const requireLogin = passport.authenticate('local', { session: false });
 const requireAuth = passport.authenticate('jwt', { session: false });
