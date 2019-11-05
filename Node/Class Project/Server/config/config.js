@@ -6,20 +6,23 @@ var config = {
         root: rootPath,
         app: { name: 'UCCSS' },
         port: 5000,
-      db: 'mongodb://127.0.0.1/todo-dev'
+      db: 'mongodb://127.0.0.1/todo-dev',
+      secret: "cayennedlikedhistreats"
     },
     test: {
         root: rootPath,
-        app: { name: 'ThingsToDo' },
+        app: { name: 'ToDos' },
         port: 4000,
-         db :'mongodb://127.0.0.1/todo-test'
+         db :'mongodb://127.0.0.1/todo-test',
+         secret: "cayennedlikedhistreats"
         },
         
     production: {
         root: rootPath,
         app: { name: 'UCCSS' },
         port: 80,
-         db: 'mongodb://127.0.0.1/todo-production' 
+         db: 'mongodb://127.0.0.1/todo-production' ,
+         secret: "cayennedlikedhistreats"
     }
 };
 

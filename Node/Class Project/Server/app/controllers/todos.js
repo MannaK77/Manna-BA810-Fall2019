@@ -58,8 +58,6 @@ module.exports = function (app, config) {
 
         logger.log('info', 'Get all user todos', req.params.id);
 
-
-
         var query = Todo.find()
 
             .sort(req.query.order)
@@ -156,9 +154,9 @@ module.exports = function (app, config) {
 
 
 
-        var Todo = new Todo(req.body);
+        var todo = new Todo(req.body);
 
-        Todo.save()
+        todo.save()
 
             .then(result => {
 
