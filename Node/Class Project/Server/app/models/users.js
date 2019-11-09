@@ -13,7 +13,7 @@ var userSchema = new Schema({
 
 });
 
-/*UserSchema.pre('save', function (next) {
+userSchema.pre('save', function (next) {
     var person = this;
     if (this.isModified('password') || this.isNew) {
         Bcrypt.genSalt(10, function (err, salt) {
@@ -34,13 +34,13 @@ var userSchema = new Schema({
     }
 });
 
-UserSchema.methods.comparePassword = function (passw, cb) {
+userSchema.methods.comparePassword = function (passw, cb) {
     Bcrypt.compare(passw, this.password, function (err, isMatch) {
         if (err) {
             return cb(err);
         }
         cb(null, isMatch);
     });
-};*/
+};
 
 module.exports = Mongoose.model('User', userSchema);
