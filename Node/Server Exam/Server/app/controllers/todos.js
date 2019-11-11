@@ -10,8 +10,6 @@ var express = require('express'),
 
     Todo = mongoose.model('todos');
 
-
-
 module.exports = function (app, config) {
 
     app.use('/api', router);//middleware that installs the router all routes will go below here in this loop only 
@@ -52,9 +50,9 @@ module.exports = function (app, config) {
 
 
 
-    router.route('/todos/user/:id').get((req, res, next) => {
+    router.route('/todos/gadget/:id').get((req, res, next) => {
 
-        logger.log('info', 'Get all user todos', req.params.id);
+        logger.log('info', 'Get all gadget todos', req.params.id);
 
         var query = Todo.find()
 
@@ -91,9 +89,9 @@ module.exports = function (app, config) {
     router.route('/todos/:id').get((req, res, next) => {
         logger.log('info', 'Get todo %s', req.params.id);
         Todo.findById(req.params.id)
-            .then(user => {
-                if (user) {
-                    res.status(200).json(user);
+            .then(gadget => {
+                if (gadget) {
+                    res.status(200).json(gadget);
                 } else {
                     res.status(404).json({ message: "No Todos found" });
                 }

@@ -3,7 +3,7 @@ var status = ['Todo','InProcess','Completed'];
 var Schema = Mongoose.Schema;
 
 var TodosSchema = new Schema({
-    userid : { type: Schema.Types.ObjectId, required: true },
+    gadgetid : { type: Schema.Types.ObjectId, required: true },
     todo : { type: String, required: true },
     detail :{ type: String},
     dateCreated :{type: Date, default: Date.now},
