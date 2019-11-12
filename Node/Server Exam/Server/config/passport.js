@@ -1,4 +1,4 @@
-const passport = require('passport'),
+/*const passport = require('passport'),
     jwt = require('jsonwebtoken'),
     User = require('../app/models/users'),
     config = require('./config'),
@@ -71,4 +71,4 @@ var jwtLogin = new jwtStrategy(jwtOptions, function (payload, next) {
             return next(err);
         });
 });
-passport.use(jwtLogin);
+passport.use(jwtLogin);*/

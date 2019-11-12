@@ -4,25 +4,25 @@ var path = require('path'),
 var config = {
     development: {
         root: rootPath,
-        app: { name: 'UCCSS' },
+        app: { name: 'Gadget' },
         port: 5000,
       db: 'mongodb://127.0.0.1/todo-dev',
-      secret: "cayennedlikedhistreats"
+      //secret: "cayennedlikedhistreats"
     },
     test: {
         root: rootPath,
         app: { name: 'ToDos' },
         port: 4000,
          db :'mongodb://127.0.0.1/todo-test',
-         secret: "cayennedlikedhistreats"
+         //secret: "cayennedlikedhistreats"
         },
         
     production: {
         root: rootPath,
-        app: { name: 'UCCSS' },
+        app: { name: 'Gadget' },
         port: 80,
          db: 'mongodb://127.0.0.1/todo-production' ,
-         secret: "cayennedlikedhistreats"
+         //secret: "cayennedlikedhistreats"
     }
 };
 

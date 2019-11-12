@@ -8,7 +8,7 @@ var gadgetSchema = new Schema({
     // active: { type: Boolean, default: true },
     // email: { type: String, required: true, unique: true },
     // password: { type: String, required: true },
-    // dateRegistered: { type: Date, default: Date.now }
+     dateRegistered: { type: Date, default: Date.now }
 
 
 });

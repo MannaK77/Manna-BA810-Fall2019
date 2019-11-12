@@ -1,7 +1,7 @@
 //During the test the env variable is set to test
 process.env.NODE_ENV = 'test';
 var mongoose = require("mongoose");
-const User = require('../app/models/users');
+const Gadget = require('../app/models/gadgets');
 const Todo = require('../app/models/todos');
 
 //Require the dev-dependencies
@@ -30,69 +30,63 @@ it('it should return 404', (done) => {
         });
 });
 
-describe('User', () => {
+describe('Gadget', () => {
     beforeEach((done) => {
-        User.remove({}, (err) => {
+        Gadget.remove({}, (err) => {
             done();
         });
     });
 
-    it('it should POST a user', (done) => {
-        var user = {
-            "firstName": "Jane",
-            "lastName": "Doe",
-            "email": "woo@hoo.com",
-            "password": "pass"
-        }
+    it('it should POST a gadget', (done) => {
+        var gadget = {
+            "Yoo": "Watch",
+            "Hoo": "2",
+                    }
         chai.request(server)
-            .post('/api/users')
-            .send(user)
+            .post('/api/gadgets')
+            .send(gadget)
             .end((err, res) => {
                 res.should.have.status(201);
-                res.body.should.have.property('firstName');
-                res.body.firstName.should.be.a('string');
-                res.body.firstName.should.equal('Jane');
+                res.body.should.have.property('Yoo');
+                res.body.Yoo.should.be.a('string');
+                res.body.Yoo.should.equal('Watch');
                 done();
             });
     });
-     it('it should not POST a user without email field', (done) => {
-         var user = {
-            "firstName": "Jane",
-            "lastName": "Doe",
-            "password": "pass"
-       }
+     it('it should not POST a gadget without number field', (done) => {
+         var gadget = {
+            "Yoo": "Watch",
+                   }
        chai.request(server)
-             .post('/api/users')
-             .send(user)
+             .post('/api/gadgets')
+             .send(gadget)
             .end((err, res) => {
                 res.should.have.status(500);
                 done();
             });
      });
-     it('it should not POST a user without email field', (done) => {
-        var user = {
-        "firstName": "Jane",
-             "lastName": "Doe",
-             "password": "pass"
+
+     it('it should not POST a user without number field', (done) => {
+        var gadget = {
+        "Yoo": "Watch",
+             
         }
         chai.request(server)
-            .post('/api/users')
-            .send(user)
+            .post('/api/gadgets')
+            .send(gadget)
             .end((err, res) => {
                 res.should.have.status(500);
                 done();
             });
     });
-    it('it should GET all the users', (done) => {
-        var user = new User({
-            "firstName": "Jane",
-            "lastName": "Doe",
-            "email": "JaneDoe@hoo.com",
-            "password": "pass"
+    it('it should GET all the gadgets', (done) => {
+        var gadget = new Gadget({
+            "Yoo": "Watch",
+              "Hoo": "2"
         });
-        user.save((err, user) => {
+        gadget.save((err, gadget) => {
             chai.request(server)
-                .get('/api/users')
+                .get('/api/gadgets')
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('array');
@@ -102,16 +96,14 @@ describe('User', () => {
         });
     });
 
-    it('it should GET all the users', (done) => {
-        var user = new User({
-            "firstName": "Jane",
-            "lastName": "Doe",
-            "email": "JaneDoe@hoo.com",
-            "password": "pass"
+    it('it should GET all the gadgets', (done) => {
+        var gadget = new Gadget({
+            "Yoo": "Watch",
+            "Hoo": "2"
         });
-        user.save((err, user) => {
+        gaget.save((err, gadget) => {
             chai.request(server)
-                .get('/api/users')
+                .get('/api/gadgets')
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('array');
@@ -120,93 +112,82 @@ describe('User', () => {
                 });
         });
     });
-    it('it should GET a user by the given id', (done) => {
-        var user = new User({
-            "firstName": "Jane",
-            "lastName": "Doe",
-            "email": "JaneDoe@hoo.com",
-            "password": "pass"
+
+    it('it should GET a gadget by the given id', (done) => {
+        var gadget = new Gadget({
+            "Yoo": "Watch",
+            "Hoo": "2"
         });
 
-        user.save((err, user) => {
+        gadgetr.save((err, gadget) => {
             chai.request(server)
-                .get('/api/users/' + user._id)
-                .send(user)
+                .get('/api/gadgets/' + gadget._id)
+                .send(gadget)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
-                    res.body.should.have.property('firstName');
-                    res.body.should.have.property('lastName');
-                    res.body.should.have.property('email');
-                    res.body.should.have.property('password');
-                    res.body.should.have.property('_id').eql(user._id.toString());
+                    res.body.should.have.property('Yoo');
+                    res.body.should.have.property('Hoo');
+                    res.body.should.have.property('_id').eql(gadget._id.toString());
                     done();
                 });
         });
 
     });
-    it('it should GET a user by the given id', (done) => {
-        var user = new User({
-            "firstName": "Jane",
-            "lastName": "Doe",
-            "email": "JaneDoe@hoo.com",
-            "password": "pass"
+
+    it('it should GET a gadget by the given id', (done) => {
+        var gadget = new Gadget({
+            "Yoo": "Watch",
+             "Hoo": "2"
         });
 
-        user.save((err, user) => {
+        gadget.save((err, gadget) => {
             chai.request(server)
-                .get('/api/users/' + user._id)
-                .send(user)
+                .get('/api/gadgets/' + gadget._id)
+                .send(gadget)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
-                    res.body.should.have.property('firstName');
-                    res.body.should.have.property('lastName');
-                    res.body.should.have.property('email');
-                    res.body.should.have.property('password');
-                    res.body.should.have.property('_id').eql(user._id.toString());
+                    res.body.should.have.property('Yoo');
+                    res.body.should.have.property('Hoo');
+                    res.body.should.have.property('_id').eql(gadget._id.toString());
                     done();
                 });
         });
 
     });
-    it('it should UPDATE a user', (done) => {
+    it('it should UPDATE a gadget', (done) => {
 
-        var user = new User({
-            "firstName": "Jane",
-            "lastName": "Doe",
-            "email": "yoo@hoo.com",
-            "password": "pass"
+        var gadget = new Gadget({
+            "Yoo": "Watch",
+            "Hoo": "3"
         });
-        user.save((err, user) => {
+        gadget.save((err, gadget) => {
             chai.request(server)
-                .put('/api/users/' + user._id)
+                .put('/api/gadgets/' + gadget._id)
                 .send({
-                    "_id": user._id,
-                    "firstName": "Joey",
-                    "lastName": "Doe",
-                    "email": "yoo@hoo.edu",
-                    "password": "pass"
+                    "_id": gadget._id,
+                    "Yoo": "Watch",
+                    "Hoo": "3"
                 })
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
-                    res.body.should.have.property('email').eql('yoo@hoo.edu');
-                    res.body.should.have.property('firstName').eql('Joey');
+                    res.body.should.have.property('Hoo').eql('3');
+                    res.body.should.have.property('Yoo').eql('Watch');
                     done();
                 });
         });
     });
-    it('it should DELETE a user given the id', (done) => {
-        var user = new User({
-            "firstName": "Jane",
-            "lastName": "Doe",
-            "email": "five@hoo.com",
-            "password": "pass"
+    it('it should DELETE a gadget given the id', (done) => {
+        var gadget = new Gadget({
+            "Yoo": "Watch",
+            
+            "Hoo": "2"
         });
-        user.save((err, user) => {
+        gadget.save((err, gadget) => {
             chai.request(server)
-                .delete('/api/users/' + user.id)
+                .delete('/api/gadgets/' + gadget.id)
                 .end((err, res) => {
                     res.should.have.status(200);
                     done();
@@ -216,7 +197,7 @@ describe('User', () => {
 
 });
 
-var USER_ID;
+var GADGET_ID;
 
 describe('ToDos', () => {
     beforeEach((done) => {
@@ -227,19 +208,17 @@ describe('ToDos', () => {
         });
    
 
-    var user = new User({
-        "firstName": "Jane",
-        "lastName": "Doe",
-        "email": "JaneDoe@hoo.com",
-        "password": "pass"
+    var gadget = new Gadget({
+        "Yoo": "Watch",
+         "Hoo": "2"
     });
-    user.save((err, user) => {
-        USER_ID = user._id;
+    gadget.save((err, gadget) => {
+        GADGET_ID = gadget._id;
     });
 
     it('it should POST a todo', (done) => {
         var todo = {
-            "userid": USER_ID,
+            "gadgetid": GADEGT_ID,
             "todo": "This is my ToDo"
         }
         chai.request(server)
@@ -255,14 +234,14 @@ describe('ToDos', () => {
     });
 
 
-    it('it should GET a users todos', (done) => {
+    it('it should GET a gadgets todos', (done) => {
         var todo = new Todo({
-            "userid": USER_ID,
+            "gadgetid": GADGET_ID,
             "todo": "This is my ToDo"
         })
         todo.save((err, todo) => {
             chai.request(server)
-                .get('/api/todos/user/' + USER_ID)
+                .get('/api/todos/gadget/' + GADGET_ID)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('array');
@@ -274,7 +253,7 @@ describe('ToDos', () => {
 
     it('it should GET a todo', (done) => {
         var todo = new Todo({
-            "userid": USER_ID,
+            "gadgetid": GADGET_ID,
             "todo": "This is my ToDo"
         })
 
@@ -284,7 +263,7 @@ describe('ToDos', () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
-                    res.body.should.have.property('userid');
+                    res.body.should.have.property('gadgetid');
                     res.body.should.have.property('todo');
                     res.body.should.have.property('status');
                     res.body.should.have.property('dateCreated');
@@ -297,7 +276,7 @@ describe('ToDos', () => {
     it('it should UPDATE a todo', (done) => {
 
         var todo = new Todo({
-            "userid": USER_ID,
+            "gadgetid": GADGET_ID,
             "todo": "This is my ToDo",
             "detail": "This is a description"
         })
@@ -306,7 +285,7 @@ describe('ToDos', () => {
                 .put('/api/todos/' + todo._id)
                 .send({
                     "_id": todo._id,
-                    "userid": USER_ID,
+                    "gadgetid": GADGET_ID,
                     "todo": "Get it done!",
                     "detail": "I don't need a description",
                 })
@@ -322,7 +301,7 @@ describe('ToDos', () => {
 
     it('it should DELETE a todo given the id', (done) => {
         var todo = new Todo({
-            "userid": USER_ID,
+            "gadgetid": GADGET_ID,
             "todo": "This is my ToDo",
             "description": "This is a description"
         })
