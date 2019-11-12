@@ -69,3 +69,9 @@
 {"level":"info","message":"Mongoose connected to the database"}
 {"level":"info","message":"Loading Mongoose functionality"}
 {"level":"info","message":"Mongoose connected to the database"}
+{"level":"info","message":"Loading Mongoose functionality"}
+{"level":"info","message":"Mongoose connected to the database"}
+{"level":"info","message":"Create Gadget"}
+{"level":"info","message":"Get gadget %s"}
+{"level":"info","message":"Loading Mongoose functionality"}
+{"level":"info","message":"Mongoose connected to the database"}
