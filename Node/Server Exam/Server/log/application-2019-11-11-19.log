@@ -75,3 +75,16 @@
 {"level":"info","message":"Get gadget %s"}
 {"level":"info","message":"Loading Mongoose functionality"}
 {"level":"info","message":"Mongoose connected to the database"}
+{"level":"info","message":"Loading Mongoose functionality"}
+{"level":"info","message":"Create Gadget"}
+{"level":"info","message":"Get all gadgets"}
+{"level":"info","message":"Get all gadgets"}
+{"level":"info","message":"Get gadget %s"}
+{"level":"info","message":"Get gadget %s"}
+{"level":"info","message":"Get gadget %s"}
+{"level":"info","message":"Delete gadget 5dca0d21799e362be891e234"}
+{"level":"info","message":"Create Todo"}
+{"level":"info","message":"Get all gadget todos"}
+{"level":"info","message":"Get todo %s"}
+{"level":"info","message":"Get Todo %s"}
+{"level":"info","message":"Get Todo %s"}
