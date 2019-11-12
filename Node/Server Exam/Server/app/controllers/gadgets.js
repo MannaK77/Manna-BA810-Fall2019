@@ -39,7 +39,7 @@ module.exports = function (app, config) {
 
     });
 
-    router.route('/gadgets/login').post(requireLogin, login);
+   // router.route('/gadgets/login').post(requireLogin, login);
 
     router.route('/gadgets/:id').get((req, res, next) => {
         logger.log('info', 'Get gadget %s', req.params.id);

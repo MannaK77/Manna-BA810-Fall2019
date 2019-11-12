@@ -53,32 +53,7 @@ describe('Gadget', () => {
                 done();
             });
     });
-     it('it should not POST a gadget without number field', (done) => {
-         var gadget = {
-            "Yoo": "Watch",
-                   }
-       chai.request(server)
-             .post('/api/gadgets')
-             .send(gadget)
-            .end((err, res) => {
-                res.should.have.status(500);
-                done();
-            });
-     });
-
-     it('it should not POST a user without number field', (done) => {
-        var gadget = {
-        "Yoo": "Watch",
-             
-        }
-        chai.request(server)
-            .post('/api/gadgets')
-            .send(gadget)
-            .end((err, res) => {
-                res.should.have.status(500);
-                done();
-            });
-    });
+    
     it('it should GET all the gadgets', (done) => {
         var gadget = new Gadget({
             "Yoo": "Watch",
@@ -101,7 +76,7 @@ describe('Gadget', () => {
             "Yoo": "Watch",
             "Hoo": "2"
         });
-        gaget.save((err, gadget) => {
+        gadget.save((err, gadget) => {
             chai.request(server)
                 .get('/api/gadgets')
                 .end((err, res) => {
@@ -119,7 +94,7 @@ describe('Gadget', () => {
             "Hoo": "2"
         });
 
-        gadgetr.save((err, gadget) => {
+        gadget.save((err, gadget) => {
             chai.request(server)
                 .get('/api/gadgets/' + gadget._id)
                 .send(gadget)
@@ -156,6 +131,7 @@ describe('Gadget', () => {
         });
 
     });
+
     it('it should UPDATE a gadget', (done) => {
 
         var gadget = new Gadget({
@@ -173,12 +149,13 @@ describe('Gadget', () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
-                    res.body.should.have.property('Hoo').eql('3');
+                    res.body.should.have.property('Hoo').eql(3);
                     res.body.should.have.property('Yoo').eql('Watch');
                     done();
                 });
         });
     });
+
     it('it should DELETE a gadget given the id', (done) => {
         var gadget = new Gadget({
             "Yoo": "Watch",
@@ -195,15 +172,14 @@ describe('Gadget', () => {
         });
     });
 
-});
+ });
 
 var GADGET_ID;
 
 describe('ToDos', () => {
     beforeEach((done) => {
         Todo.remove({}, (err) => {
-            //User.remove({}, (err) => {
-                done();
+               done();
             });
         });
    
@@ -218,7 +194,7 @@ describe('ToDos', () => {
 
     it('it should POST a todo', (done) => {
         var todo = {
-            "gadgetid": GADEGT_ID,
+            "gadgetid": GADGET_ID,
             "todo": "This is my ToDo"
         }
         chai.request(server)

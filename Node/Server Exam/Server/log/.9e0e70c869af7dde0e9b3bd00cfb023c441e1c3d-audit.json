@@ -64,6 +64,16 @@
             "date": 1573341735644,
             "name": "log\\application-2019-11-09-17.log",
             "hash": "6429137feb84a054231b3a9d57c628c7"
+        },
+        {
+            "date": 1573518841935,
+            "name": "log\\application-2019-11-11-18.log",
+            "hash": "2d56f3c47332a333a1cf7158554242fc"
+        },
+        {
+            "date": 1573520682237,
+            "name": "log\\application-2019-11-11-19.log",
+            "hash": "8ece8ee6b2c5909b7a367c0362db2aab"
         }
     ]
 }
