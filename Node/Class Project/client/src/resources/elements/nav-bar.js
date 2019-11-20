@@ -1,4 +1,3 @@
-
 import { inject } from 'aurelia-framework';
 import { Router } from 'aurelia-router';
 @inject(Router)
@@ -6,7 +5,17 @@ export class NavBar {
     constructor(router) {
         this.authenticated = false;
         this.router = router;
+        this.email = "";
+        this.password = "";
     }
+    
+    attached() {
+        $('.navbar-nav a').on('click', function () {
+            $('.navbar-nav').find('li.active').removeClass('active');
+            $(this).parent('li').addClass('active');
+        });
+    }
+
     login() {
         console.log(this.email);
         console.log(this.password);
@@ -16,12 +25,6 @@ export class NavBar {
     logout() {
         this.authenticated = false;
         this.router.navigate('landing');
-    }
-    attached() {
-        $('.navbar-nav a').on('click', function () {
-            $('.navbar-nav').find('li.active').removeClass('active');
-            $(this).parent('li').addClass('active');
-        });
     }
 
 }
