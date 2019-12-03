@@ -7,10 +7,10 @@
                 </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul show.bind="authenticated"  class="navbar-nav mr-auto">
-                       <li class="nav-item active">
+                <!--        <li class="nav-item active">
                                   <a class="nav-link" href="#users">Users <span class="sr-only">(current)</span></a>
                                 </li>
-                                                 
+                                                  -->
                             <li class="nav-item">
                                   <a class="nav-link" href="#todos">Todos</a>
                                 </li>
@@ -29,7 +29,8 @@
                         <label for="inputPassword2" class="sr-only">Password</label>
                         <input value.bind="password" type="password" class="form-control" id="inputPassword2" placeholder="Password">
                     </div>
-                    <button type="submit" click.trigger="login()" class="btn btn-primary mb-2">Confirm identity</button>
+                    <button type="submit" click.trigger="login()" class="btn btn-primary mb-2">Login</button>
+                    <span style= "margin-left:20px;" show.bind="loginError">${loginError}</span>
                 </form>
                 </div>    
         </div>

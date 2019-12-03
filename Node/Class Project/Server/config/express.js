@@ -3,10 +3,11 @@ var morgan = require('morgan');
 const logger = require('./logger');
 const mongoose = require('mongoose');
 const fs = require('fs');
-
+const cors = require('cors');
 const bodyParser = require('body-parser');
 
 module.exports = function (app, config) {
+    app.use(cors({origin: 'http://localhost:9000'}));
     logger.log('info', "Loading Mongoose functionality");
     mongoose.Promise = require('bluebird');
     mongoose.connect(config.db);
