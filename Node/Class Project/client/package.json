@@ -12,6 +12,7 @@
     "aurelia-auth": "^3.0.5",
     "aurelia-bootstrapper": "^2.3.2",
     "aurelia-fetch-client": "^1.8.2",
+    "bluebird": "^3.7.2",
     "flatpickr": "^4.6.3",
     "moment": "^2.24.0"
   },
