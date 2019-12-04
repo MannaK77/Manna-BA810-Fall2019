@@ -1,6 +1,6 @@
 import { inject } from 'aurelia-framework';
 import { Router } from 'aurelia-router';
-import { Todo } from '../resources/data/todo-object ';
+import { Todo } from '../resources/data/todo-object';
 @inject(Todo)
 
 export class Todos {
@@ -10,31 +10,23 @@ export class Todos {
     this.statuses = ['Todo', 'In Process', 'Completed'];
     this.isCheckedCompleted = true;
   }
-  newTodo() {
-    this.todo.newTodo(this.userObj._id);
-    this.showForm = true;
-  }
-
-  async saveTodo() {
-    await this.todo.saveTodo()
-  }
-
-  Cancel() {
-    this.showForm = false;
-  }
-
+  
   async attached() {
     await this.getTodos();
   }
-
   async getTodos() {
     await this.todo.getTodos(this.userObj._id);
     this.showForm = false;
   }
 
-  async saveTodo() {
-    await this.todo.saveTodo()
-    this.getTodos();
+  updateTodo(todo) {
+    this.todo.selectedTodo = todo;
+    this.saveTodo();
+  }
+
+  newTodo() {
+    this.todo.newTodo(this.userObj._id);
+    this.showForm = true;
   }
 
   editTodo(todo) {
@@ -42,14 +34,20 @@ export class Todos {
     this.showForm = true;
   }
 
-  updateTodo(todo) {
-    this.todo.selectedTodo = todo;
-    this.saveTodo();
+  async saveTodo() {
+    await this.todo.saveTodo()
+    this.getTodos();
   }
-  async deleteTodos() {
-    await this.todo.deleteTodos(this.todo._id);
-    this.deleteTodos();
+  
+
+  async deleteTodo() {
+    await this.todo.deleteTodo(todo._id);
+    this.getTodos();
+    
   }
 
+  Cancel() {
+    this.showForm = false;
+  }
 
-}
+  }

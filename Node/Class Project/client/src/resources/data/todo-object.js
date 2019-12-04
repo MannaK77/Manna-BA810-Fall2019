@@ -15,6 +15,7 @@ newTodo(id){
         this.selectedTodo.status = "Todo";
         this.selectedTodo.userId = id;
       }
+        
      async saveTodo() {
         let serverResponse;
         if (this.selectedTodo) {
@@ -37,5 +38,9 @@ newTodo(id){
               this.todosArray = [];
             }
           }
-        
+
+        async deleteTodo(id){
+            let url = this.TODO_SERVICE + '/' + id;
+            await this.data.delete(url);
+        }
 }

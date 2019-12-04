@@ -1,10 +1,10 @@
-import { inject } from 'aurelia-framework';
-import { Router } from 'aurelia-router';
-import { AuthService } from 'aurelia-auth';
+import {inject} from 'aurelia-framework';
+import {Router} from 'aurelia-router';
+import {AuthService} from 'aurelia-auth';
 
-@inject(Router, AuthService)
+@inject(Router,AuthService)
 export class NavBar {
-    constructor(router, auth) {
+    constructor(router,auth) {
         //this.authenticated = false;
         this.router = router;
         this.auth = auth;
@@ -27,7 +27,7 @@ export class NavBar {
                 sessionStorage.setItem("userObj", JSON.stringify(this.userObj));
                 this.loginError = "";
                 this.authenticated = this.auth.isAuthenticated();
-                this.router.navigate('todos');
+                this.router.navigate('home');
             })
             .catch(error => {
                 console.log(error);

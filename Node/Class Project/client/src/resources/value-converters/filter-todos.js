@@ -1,7 +1,7 @@
 export class FilterTodosValueConverter {
-      toView(todos, nofilterTodos) {
+      toView(todos, filterTodos) {
         if (!todos) return;
-        if (nofilterTodos) return todos;
+        if (!filterTodos) return todos;
          let filteredTodos = [];
         todos.forEach(todo => {
           if (todo.status !== 'Completed') filteredTodos.push(todo);

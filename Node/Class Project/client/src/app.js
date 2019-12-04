@@ -8,7 +8,7 @@ export class App {
                 config.map([
                         {
                                 route: ['', 'home'],
-                                name: 'home',
+                                name: 'Home',
                                 moduleId: 'modules/home',
                                 title: 'Home',
                                 auth: false
@@ -18,16 +18,18 @@ export class App {
                                 name: 'users',
                                 moduleId: 'modules/users',
                                 title: 'Users'
-                                
+
                         },
 
                         {
                                 route: 'todos',
-                                name: 'todos',
+                                name: 'Todos',
                                 moduleId: 'modules/todos',
                                 title: 'Todos',
                                 auth: true
                         }
+
+                        
 
                 ]);
         }
