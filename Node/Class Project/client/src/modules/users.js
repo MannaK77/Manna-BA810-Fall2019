@@ -19,7 +19,7 @@ export class Users {
       email: "",
       password: ""
     }
-    //this.showUserEditForm = true;
+    this.showUserEditForm = true;
   }
 
   async save() {
