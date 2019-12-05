@@ -13,7 +13,7 @@ newTodo(id){
         this.selectedTodo.detail = "";
         this.selectedTodo.dateDue = new Date();
         this.selectedTodo.status = "Todo";
-        this.selectedTodo.userId = id;
+        this.selectedTodo.userid = id;
       }
         
      async saveTodo() {

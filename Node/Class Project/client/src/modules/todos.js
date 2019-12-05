@@ -40,7 +40,7 @@ export class Todos {
   }
   
 
-  async deleteTodo() {
+  async deleteTodo(todo) {
     await this.todo.deleteTodo(todo._id);
     this.getTodos();
     
