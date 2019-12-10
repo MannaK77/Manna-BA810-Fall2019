@@ -3,9 +3,17 @@ import { AuthorizeStep } from 'aurelia-auth';
 export class App {
         configureRouter(config, router) {
                 this.router = router;
-                config.addPipelineStep('authorize', AuthorizeStep);
+                //config.addPipelineStep('authorize', AuthorizeStep);
                 config.title = 'Widgets';
                 config.map([
+                        {
+                                route: ['', 'home'],
+                                name: 'home',
+                                moduleId: 'modules/home',
+                                title: 'home',
+                                auth: false
+                        },
+
                         
 
                         {

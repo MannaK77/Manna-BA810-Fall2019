@@ -15,7 +15,7 @@
             <tr>
                 <th scope="col">Widget</th>
                 <th scope="col">Date Created</th>
-           <!--<th scope="col">Date Due</th>-->
+           <!--<th scope="col">Status</th>-->
                 <th></th>
             </tr>
         </thead>
@@ -24,11 +24,11 @@
                 <tr repeat.for="widget of widget.widgetsArray | filterWidgets:isCheckedCompleted">
                         <td scope="row" click.delegate="editWidget(widget)">${widget.Boo}</td>
                     <td scope="row" click.delegate="editWidget(widget)">${widget.Hoo}</td>
-                   <!-- <td><select change.delegate="updateWidget(widget)" value.bind="widget.status" class="form-control"
+                    <!-- <td><select change.delegate="updateWidget(widget)" value.bind="widget.status" class="form-control"
                             id="widgetStatus">
                             <option repeat.for="status of statuses" value.bind="status">${status}</option>
                         </select></td> 
-                     <td>${gadget.dateDue | dateFormat}</td> -->
+                     <td>${widget.dateDue | dateFormat}</td>  -->
                     <td>
                         <button click.trigger="deleteWidget(widget)" type="button" class="btn btn-danger btn-sm">Delete</button>
                     </td>
