@@ -1,0 +1,39 @@
+<template>
+    <button class="btn btn-primary" click.trigger="newWidget()" style="margin-bottom:10px;">Create Widget</button>
+    <!-- <button class="btn btn-primary" click.trigger="newTodo()" style="margin-bottom:10px;">Create Todo</button> -->
+    <table class="table table-light">
+        <thead>
+            <tr>
+                <th colspan="3">
+                    <div class="checkbox leftMargin">
+                        <label>
+                            <input checked.bind="isCheckedCompleted" type="checkbox"> Filter out Completed Widgets
+                        </label>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th scope="col">Widget</th>
+                <th scope="col">Date Created</th>
+           <!--<th scope="col">Date Due</th>-->
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+                <tr repeat.for="widget of widget.widgetsArray | filterWidgets:isCheckedCompleted">
+                        <td scope="row" click.delegate="editWidget(widget)">${widget.Boo}</td>
+                    <td scope="row" click.delegate="editWidget(widget)">${widget.Hoo}</td>
+                   <!-- <td><select change.delegate="updateWidget(widget)" value.bind="widget.status" class="form-control"
+                            id="widgetStatus">
+                            <option repeat.for="status of statuses" value.bind="status">${status}</option>
+                        </select></td> 
+                     <td>${gadget.dateDue | dateFormat}</td> -->
+                    <td>
+                        <button click.trigger="deleteWidget(widget)" type="button" class="btn btn-danger btn-sm">Delete</button>
+                    </td>
+            </tr>
+              
+        </tbody>
+    </table>
+</template>
