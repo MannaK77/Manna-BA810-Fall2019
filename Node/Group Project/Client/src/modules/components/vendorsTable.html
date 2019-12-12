@@ -1,0 +1,38 @@
+<template>
+    <button class="btn btn-primary" click.trigger="newVendor()" style="margin-bottom:10px;">Add Vendor</button>
+    <!-- <button class="btn btn-primary" click.trigger="newTodo()" style="margin-bottom:10px;">Create Todo</button> -->
+    <table class="table table-light">
+        <thead>
+            <tr>
+                <th colspan="3">
+                    <div class="checkbox leftMargin">
+                        <label>
+                            <input checked.bind="isCheckedUnAvailable" type="checkbox"> Filter out UnAvailable Vendors
+                        </label>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th scope="col">Vendors</th>
+                <th scope="col">Status</th>
+                <th scope="col">Date </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr repeat.for="vendor of vendor.vendorsArray | filterVendors:isCheckedUnAvailable">
+                <td scope="row" click.delegate="editVendor(vendor)">${vendor.vendor}</td>
+                <td><select change.delegate="updateVendor(vendor)" value.bind="vendor.status" class="form-control"
+                        id="vendorStatus">
+                        <option repeat.for="status of statuses" value.bind="status">${status}</option>
+                    </select></td>
+                <td>${vendor.date | dateFormat}</td>
+                <td>
+                    <button click.trigger="deleteVendor(vendor)" type="button" class="btn btn-danger btn-sm">Delete</button>
+                </td>
+            </tr>
+              
+        </tbody>
+    </table>
+</template>
