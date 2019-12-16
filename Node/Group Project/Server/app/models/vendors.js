@@ -20,4 +20,6 @@ var VendorsSchema = new Schema({
 
 });
 
+
+
 module.exports = Mongoose.model('vendors', VendorsSchema);
