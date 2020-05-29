@@ -1,0 +1,143 @@
+---
+title: "Text Analysis"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+Load necessary libraries
+
+```{r}
+library(tm)
+library(XML)
+```
+
+Read data file from website (Abraham Lincoln Emanicipation Speech) 
+
+```{r}
+Linc <- URLencode('http://www.historyplace.com/lincoln/emanc.htm')
+doc.html <-htmlTreeParse(Linc, useInternal=TRUE)
+ #doc.html   # un-comment to see html file
+```
+
+Remove HTML code from downloaded file:
+  
+```{r}
+Linc <- unlist(xpathApply(doc.html,'//p',xmlValue))
+head(Linc)
+```
+
+Create corpus. Note: usually a corpus is comprised of a large collection of documents. Here we analyze a single document (broken into 16 parts by "Corpus").
+
+```{r}
+words.vec     <- VectorSource(Linc)
+words.corpus  <- Corpus(words.vec)            
+
+str(Linc)
+str(words.vec)
+words.corpus
+```
+
+Do some data wrangling:
+
+```{r}
+words.corpus <- tm_map(words.corpus,content_transformer(tolower))
+words.corpus <- tm_map(words.corpus,content_transformer(removePunctuation))
+words.corpus <- tm_map(words.corpus,content_transformer(removeNumbers))
+words.corpus <- tm_map(words.corpus,removeWords,stopwords('english'))
+words.corpus
+```
+
+Create a term-document matrix:
+
+```{r}
+tdm <- TermDocumentMatrix(words.corpus)
+tdm
+inspect(tdm)
+```
+
+Examine a simple term-document matrix representation by converting to a matrix.
+(Note: this transformation removes the sparse representation found in the original 
+ TDM and therefore may potentially use a large amount of memory!)
+
+
+```{r}
+m <- as.matrix(tdm);  m
+
+wordCounts <-  rowSums(m)             
+myNames    <-  names(wordCounts)        
+
+checkWordCounts <- sort(wordCounts,decreasing=TRUE)
+head(checkWordCounts)
+```
+
+Perform Cluster Analysis
+
+```{r}
+library(cluster); library(lsa)
+
+m1 <- t(m)
+m2 <- m1[,colSums(m1) > 1]
+
+mycos <- as.dist(1-cosine(m2))                                         # Cosine Distance Matrix Between Terms
+
+agnes.out <- agnes(mycos, method ="ward",stand = TRUE )                # Agglom . Clust .
+
+pltree(agnes.out, main =" ", ylab =" ", xlab =" ", yaxt ="n", sub=" ") # Create the Dendogram and 
+rect.hclust(agnes.out, k=6 , border ="red")                            # draw boxes around groups
+```
+
+Create simple word cloud using 
+(Use "words" / "word counts" to create data frame for word clouds (cloudFrame))
+
+```{r}
+library(wordcloud)
+cloudFrame <- data.frame(word = myNames, freq=wordCounts)
+wordcloud(cloudFrame$word,cloudFrame$freq)
+```
+
+Create wordcloud with arbitrary colors:
+
+```{r}
+wordcloud(cloudFrame$word, cloudFrame$freq, min.freq=2, max.words=50, rot.per=0.35, colors=brewer.pal(8,'Dark2'))
+```
+
+Determine if Abraham Lincoln's speech was generally positive or negative:
+
+Note:    posterms_GI = Postitive words from General Inquirer
+         negterms_GI = Negative words from General Inquirer
+
+```{r}
+
+#install.packages("tm.plugin.sentiment", repos = #"http://R-Forge.R-project.org")
+library(devtools)
+#install_github("mannau/tm.plugin.sentiment")
+library(tm.plugin.sentiment)
+my.polarity <- polarity(tdm, positive = posterms_GI(), negative = negterms_GI())
+mean(my.polarity)
+```
+
+Create sentiment colored word cloud.
+
+```{r}
+my.sentiments <- my.polarity %*% t(m)        # agg over documents
+my.colors     <- rep(99,length(my.sentiments))
+
+my.colors[my.sentiments <  0] <- 2 # Negative = 2 = red
+my.colors[my.sentiments == 0] <- 1 # Neutral = 1 = black
+my.colors[my.sentiments >  0] <- 3 # Positive = 3 = green
+
+sentDat <- data.frame(myNames = myNames, my.colors = my.colors, v=wordCounts)
+
+wordcloud(sentDat$myNames ,freq = sentDat$v, colors = sentDat$my.colors, random.order = FALSE, 
+          ordered.colors = TRUE , scale = c(4,.5) , min.freq=2)
+
+legend(-.4, .4, c("Positive","Neutral","Negative"), col = c(3 ,1 ,2), lty = 1, ncol = 1, lwd = 5, cex = 1.1 , bty ="n", text.font = 3)
+```
+
+#The speech is mostly positive, Abraham Lincoln used words which convey positive meaning in his proclamation speech, with occassional words which are looking negative but may not be negative in the overall context. 
+
+
+
+
